@@ -47,14 +47,14 @@ export default function DayPage() {
 
   return (
     <div
-      className="min-h-screen"
+      className="h-screen overflow-hidden flex flex-col"
       style={{
         background:
           "radial-gradient(ellipse at 70% 10%, #1E1A14 0%, #100F0D 50%)",
       }}
     >
       {/* ── Nav ── */}
-      <div className="sticky top-0 z-20 flex items-center px-6 py-4">
+      <div className="flex-shrink-0 flex items-center px-6 py-3">
         <Link
           href="/"
           className="btn-outline flex items-center gap-2 px-4 py-2 text-xs tracking-widest"
@@ -66,9 +66,13 @@ export default function DayPage() {
       </div>
 
       {/* ── Content ── */}
-      <div className="flex flex-col items-center px-6 pb-16 gap-10">
+      <div className="flex-1 min-h-0 flex flex-col items-center px-6 pt-2 pb-2 gap-6">
         <HeadingSection index={headingIndex} />
         <DayDetails first={first} last={last} />
+      </div>
+
+      {/* ── Pagination — always pinned to bottom ── */}
+      <div className="flex-shrink-0 flex justify-center py-4">
         <Pagination index={id} />
       </div>
     </div>

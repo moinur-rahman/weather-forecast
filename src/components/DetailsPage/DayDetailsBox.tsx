@@ -25,7 +25,7 @@ export default function DayDetailsBox({ index }: { index: number }) {
   if (!dayForecast) return null;
 
   return (
-    <div className="card p-5 flex flex-col gap-3" style={{ width: "200px" }}>
+    <div className="card p-4 flex flex-col gap-2" style={{ width: "190px" }}>
 
       {/* Time + icon */}
       <div className="flex items-center justify-between">
@@ -38,8 +38,8 @@ export default function DayDetailsBox({ index }: { index: number }) {
         <Image
           src={`https://openweathermap.org/img/w/${dayForecast.weather[0].icon}.png`}
           alt={dayForecast.weather[0].main}
-          width={34}
-          height={34}
+          width={28}
+          height={28}
           style={{ opacity: 0.85 }}
         />
       </div>
@@ -49,7 +49,7 @@ export default function DayDetailsBox({ index }: { index: number }) {
         <div
           className="leading-none uppercase"
           style={{
-            fontSize: "52px",
+            fontSize: "42px",
             ...DISPLAY,
             fontWeight: 900,
             color: "var(--c-text)",
@@ -58,7 +58,7 @@ export default function DayDetailsBox({ index }: { index: number }) {
         >
           {dayForecast.main.temp}°
         </div>
-        <p className="text-xs capitalize mt-1" style={{ color: "var(--c-sub)", ...MONO }}>
+        <p className="text-xs capitalize mt-0.5" style={{ color: "var(--c-sub)", ...MONO }}>
           {dayForecast.weather[0].description}
         </p>
       </div>
@@ -66,7 +66,7 @@ export default function DayDetailsBox({ index }: { index: number }) {
       <div className="rule" />
 
       {/* Stats grid */}
-      <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
+      <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
         {[
           ["HUM", `${dayForecast.main.humidity}%`],
           ["CLD", `${dayForecast.clouds.all}%`],
@@ -80,7 +80,7 @@ export default function DayDetailsBox({ index }: { index: number }) {
             >
               {label}
             </span>
-            <span className="text-xs font-semibold" style={{ color: "var(--c-sub)", ...MONO }}>
+            <span className="text-xs font-semibold" style={{ color: "var(--c-text)", ...MONO }}>
               {value}
             </span>
           </div>

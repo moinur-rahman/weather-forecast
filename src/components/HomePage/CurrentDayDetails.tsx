@@ -28,7 +28,7 @@ export default function CurrentDayDetails() {
   return (
     <div className="card px-5 py-4">
       <p
-        className="text-[9px] uppercase tracking-widest mb-3"
+        className="text-[10px] uppercase tracking-widest mb-3"
         style={{ color: "var(--c-muted)", ...MONO }}
       >
         Hourly Forecast
@@ -38,7 +38,7 @@ export default function CurrentDayDetails() {
           visibleCount > pos ? (
             <div
               key={idx}
-              className="animate-card-in"
+              className="animate-card-in flex-1 min-w-0"
               style={{ animationDelay: `${pos * 70}ms` }}
             >
               <CurrentDayDetailsBox index={idx} />

@@ -28,7 +28,7 @@ export default function DayDetails({ first, last }: DayDetailsProps) {
   }
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 w-full max-w-5xl">
+    <div className="flex flex-wrap justify-center gap-3 w-full max-w-5xl">
       {indices.map((idx, pos) =>
         visibleCount > pos ? (
           <div

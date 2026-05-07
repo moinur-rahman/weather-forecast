@@ -23,10 +23,10 @@ export default function HeadingSection({ index }: { index: number }) {
   }) ?? "";
 
   return (
-    <div className="text-center animate-fade-up w-full max-w-3xl">
+    <div className="text-center animate-fade-up w-full max-w-3xl flex-shrink-0">
       {city && (
         <p
-          className="text-xs uppercase tracking-widest mb-4"
+          className="text-xs uppercase tracking-widest mb-2"
           style={{ color: "var(--c-muted)", ...MONO }}
         >
           {city.name}, {city.country}
@@ -37,7 +37,7 @@ export default function HeadingSection({ index }: { index: number }) {
         className="leading-none uppercase"
         style={{
           ...DISPLAY,
-          fontSize: "clamp(60px, 9vw, 120px)",
+          fontSize: "clamp(44px, 6vw, 88px)",
           fontWeight: 900,
           color: "var(--c-text)",
           letterSpacing: "-0.02em",
@@ -46,11 +46,11 @@ export default function HeadingSection({ index }: { index: number }) {
         {dayName}
       </h1>
 
-      <p className="text-sm mt-3" style={{ color: "var(--c-sub)", ...MONO }}>
+      <p className="text-sm mt-2" style={{ color: "var(--c-sub)", ...MONO }}>
         {fullDate}
       </p>
 
-      <div className="rule mt-6" />
+      <div className="rule mt-4" />
     </div>
   );
 }
