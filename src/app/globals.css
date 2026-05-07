@@ -1,16 +1,140 @@
 @import "tailwindcss";
 
-@keyframes fade-scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+:root {
+  --c-bg:           #100F0D;
+  --c-base:         #1A1815;
+  --c-raised:       #252118;
+  --c-border:       rgba(255, 255, 255, 0.07);
+  --c-border-hover: rgba(232, 160, 40, 0.3);
+  --c-accent:       #E8A028;
+  --c-accent-dim:   rgba(232, 160, 40, 0.12);
+  --c-text:         #F2EAE0;
+  --c-sub:          #8A7258;
+  --c-muted:        #46382A;
 }
 
-.animate-fade-in {
-  animation: fade-scale-in 0.15s ease-out forwards;
+html { height: 100%; }
+body {
+  min-height: 100%;
+  background: var(--c-bg);
+  color: var(--c-text);
 }
+
+/* ── Cards ── */
+.card {
+  background: var(--c-base);
+  border-radius: 22px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+.chip {
+  background: var(--c-raised);
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.chip:hover {
+  border-color: var(--c-border-hover);
+  background: var(--c-accent-dim);
+}
+
+/* ── Inputs ── */
+.search-input {
+  background: var(--c-raised);
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  color: var(--c-text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input::placeholder { color: var(--c-muted); opacity: 1; }
+.search-input:focus {
+  border-color: rgba(232, 160, 40, 0.45);
+  box-shadow: 0 0 0 3px rgba(232, 160, 40, 0.08);
+}
+
+/* ── Buttons ── */
+.btn-accent {
+  background: var(--c-accent);
+  color: #100F0D;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-accent:hover {
+  background: #F5B540;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(232, 160, 40, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  color: var(--c-sub);
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-outline:hover {
+  border-color: var(--c-border-hover);
+  color: var(--c-accent);
+  transform: translateY(-1px);
+}
+
+/* ── Hourly card ── */
+.hourly-card {
+  background: var(--c-base);
+  border: 1px solid var(--c-border);
+  border-radius: 16px;
+  min-width: 150px;
+  flex-shrink: 0;
+  padding: 14px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.hourly-card:hover {
+  border-color: var(--c-border-hover);
+  transform: translateY(-3px);
+}
+
+/* ── Rule ── */
+.rule { height: 1px; background: var(--c-border); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { height: 3px; width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(232, 160, 40, 0.3); border-radius: 4px; }
+
+/* ── Animations ── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes temp-in {
+  from { opacity: 0; transform: scale(0.88) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-fade-in     { animation: fade-in     0.4s ease-out forwards; }
+.animate-fade-up     { animation: fade-up     0.55s ease-out forwards; }
+.animate-slide-right { animation: slide-right 0.5s ease-out forwards; }
+.animate-card-in     { animation: card-in     0.4s ease-out forwards; }
+.animate-temp-in     { animation: temp-in     0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards; }

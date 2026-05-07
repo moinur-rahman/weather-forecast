@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import type { RootState } from "@/redux/store";
 import CurrentDayDetailsBox from "./CurrentDayDetailsBox";
 
+const MONO = { fontFamily: "var(--font-mono), monospace" };
+
 export default function CurrentDayDetails() {
-  const dayForecast = useSelector(
-    (state: RootState) => state.weatherData.dayForecast[0]
-  );
+  const dayForecast = useSelector((state: RootState) => state.weatherData.dayForecast[0]);
   const [visibleCount, setVisibleCount] = useState(0);
 
   useEffect(() => {
@@ -23,33 +23,27 @@ export default function CurrentDayDetails() {
     return () => clearInterval(intervalId);
   }, [dayForecast]);
 
+  if (!dayForecast) return null;
+
   return (
-    <div className="flex flex-col items-center justify-center w-full h-[45%]">
-      {dayForecast && visibleCount >= 1 && (
-        <h1 className="animate-fade-in text-white text-2xl font-semibold mb-3">
-          Hourly Forecast
-        </h1>
-      )}
-      <div className="flex items-center justify-evenly w-full h-[90%]">
-        {visibleCount >= 1 && (
-          <div className="animate-fade-in">
-            <CurrentDayDetailsBox index={1} />
-          </div>
-        )}
-        {visibleCount >= 2 && (
-          <div className="animate-fade-in">
-            <CurrentDayDetailsBox index={2} />
-          </div>
-        )}
-        {visibleCount >= 3 && (
-          <div className="animate-fade-in">
-            <CurrentDayDetailsBox index={3} />
-          </div>
-        )}
-        {visibleCount >= 4 && (
-          <div className="animate-fade-in">
-            <CurrentDayDetailsBox index={4} />
-          </div>
+    <div className="card px-5 py-4">
+      <p
+        className="text-[9px] uppercase tracking-widest mb-3"
+        style={{ color: "var(--c-muted)", ...MONO }}
+      >
+        Hourly Forecast
+      </p>
+      <div className="flex gap-3 overflow-x-auto pb-1">
+        {([1, 2, 3, 4] as const).map((idx, pos) =>
+          visibleCount > pos ? (
+            <div
+              key={idx}
+              className="animate-card-in"
+              style={{ animationDelay: `${pos * 70}ms` }}
+            >
+              <CurrentDayDetailsBox index={idx} />
+            </div>
+          ) : null
         )}
       </div>
     </div>

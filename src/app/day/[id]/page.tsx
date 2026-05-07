@@ -10,6 +10,8 @@ import HeadingSection from "@/components/DetailsPage/HeadingSection";
 import Pagination from "@/components/DetailsPage/Pagination";
 import type { RootState } from "@/redux/store";
 
+const MONO = { fontFamily: "var(--font-mono), monospace" };
+
 function getRange(
   pageId: number,
   remaining: number
@@ -22,7 +24,7 @@ function getRange(
 
 export default function DayPage() {
   const params = useParams();
-  const id = parseInt(params.id as string);
+  const id     = parseInt(params.id as string);
   const router = useRouter();
 
   const dayForecast0 = useSelector(
@@ -45,28 +47,29 @@ export default function DayPage() {
 
   return (
     <div
-      className="flex items-center justify-center w-full h-screen bg-cover bg-center flex-col"
+      className="min-h-screen"
       style={{
-        backgroundImage:
-          "linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), url('/images/cloud.jpg')",
+        background:
+          "radial-gradient(ellipse at 70% 10%, #1E1A14 0%, #100F0D 50%)",
       }}
     >
-      <div className="flex w-full justify-end items-start absolute top-0 right-0 p-3">
+      {/* ── Nav ── */}
+      <div className="sticky top-0 z-20 flex items-center px-6 py-4">
         <Link
           href="/"
-          className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors"
+          className="btn-outline flex items-center gap-2 px-4 py-2 text-xs tracking-widest"
+          style={MONO}
         >
-          <AiFillHome />
-          Back to Home
+          <AiFillHome size={12} />
+          HOME
         </Link>
       </div>
 
-      <div className="flex items-center justify-center w-[90%] h-[92%]">
-        <div className="flex flex-col items-center justify-center gap-4">
-          <HeadingSection index={headingIndex} />
-          <DayDetails first={first} last={last} />
-          <Pagination index={id} />
-        </div>
+      {/* ── Content ── */}
+      <div className="flex flex-col items-center px-6 pb-16 gap-10">
+        <HeadingSection index={headingIndex} />
+        <DayDetails first={first} last={last} />
+        <Pagination index={id} />
       </div>
     </div>
   );

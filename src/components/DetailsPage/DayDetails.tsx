@@ -18,22 +18,23 @@ export default function DayDetails({ first, last }: DayDetailsProps) {
       count += 1;
       setVisibleCount(count);
       if (count >= 8) clearInterval(intervalId);
-    }, 125);
+    }, 90);
     return () => clearInterval(intervalId);
   }, [first]);
 
-  const indices = [];
+  const indices: number[] = [];
   for (let i = first; i <= last && i < 40; i++) {
     indices.push(i);
   }
 
   return (
-    <div className="flex flex-wrap justify-evenly gap-4">
+    <div className="flex flex-wrap justify-center gap-4 w-full max-w-5xl">
       {indices.map((idx, pos) =>
         visibleCount > pos ? (
           <div
             key={idx}
-            className="animate-fade-in flex items-center justify-center w-[300px] h-[300px]"
+            className="animate-card-in"
+            style={{ animationDelay: `${pos * 45}ms` }}
           >
             <DayDetailsBox index={idx} />
           </div>

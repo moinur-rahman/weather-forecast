@@ -4,14 +4,16 @@ import CurrentDayDetails from "@/components/HomePage/CurrentDayDetails";
 export default function Home() {
   return (
     <div
-      className="flex items-center justify-center w-full h-screen bg-cover bg-center"
+      className="h-screen overflow-hidden flex flex-col p-5 gap-4"
       style={{
-        backgroundImage:
-          "linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), url('/images/cloud.jpg')",
+        background:
+          "radial-gradient(ellipse at 25% 15%, #1E1A14 0%, #100F0D 55%)",
       }}
     >
-      <div className="flex flex-col w-[90%] h-[96%]">
+      <div className="flex-1 min-h-0">
         <CurrentDay />
+      </div>
+      <div className="flex-none">
         <CurrentDayDetails />
       </div>
     </div>

@@ -1,44 +1,45 @@
 "use client";
 
 import Link from "next/link";
-import { FcNext, FcPrevious } from "react-icons/fc";
-import {
-  RiNumber1,
-  RiNumber2,
-  RiNumber3,
-  RiNumber4,
-  RiNumber5,
-  RiNumber6,
-} from "react-icons/ri";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const linkClass =
-  "flex items-center justify-center bg-white text-black w-9 h-9 rounded-md hover:bg-gray-100 transition-colors";
-
-const icons = [RiNumber1, RiNumber2, RiNumber3, RiNumber4, RiNumber5, RiNumber6];
+const MONO = { fontFamily: "var(--font-mono), monospace" };
 
 export default function Pagination({ index }: { index: number }) {
   return (
-    <div className="flex items-center gap-2 mt-4">
+    <div className="flex items-center gap-2 animate-fade-up">
       {index !== 1 && (
-        <Link href={`/day/${index - 1}`} className={linkClass}>
-          <FcPrevious />
+        <Link href={`/day/${index - 1}`} className="btn-outline w-9 h-9" style={MONO}>
+          <FaChevronLeft size={11} />
         </Link>
       )}
-      {([1, 2, 3, 4, 5, 6] as const).map((n, i) => {
-        const Icon = icons[i];
+
+      {([1, 2, 3, 4, 5, 6] as const).map((n) => {
+        const isActive = index === n;
         return (
           <Link
             key={n}
             href={`/day/${n}`}
-            className={`${linkClass} ${index === n ? "ring-2 ring-blue-400" : ""}`}
+            className="btn-outline w-10 h-9 text-xs font-bold tracking-wider"
+            style={{
+              ...MONO,
+              ...(isActive
+                ? {
+                    background: "var(--c-accent)",
+                    borderColor: "var(--c-accent)",
+                    color: "#100F0D",
+                  }
+                : {}),
+            }}
           >
-            <Icon />
+            {n}
           </Link>
         );
       })}
+
       {index !== 6 && (
-        <Link href={`/day/${index + 1}`} className={linkClass}>
-          <FcNext />
+        <Link href={`/day/${index + 1}`} className="btn-outline w-9 h-9" style={MONO}>
+          <FaChevronRight size={11} />
         </Link>
       )}
     </div>
