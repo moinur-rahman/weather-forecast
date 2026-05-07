@@ -65,7 +65,7 @@ export default function CurrentDay() {
   };
 
   return (
-    <div className="card p-5 md:h-full flex flex-col">
+    <div className="card p-5 h-full flex flex-col">
 
       {visible && dayForecast ? (
         <>
@@ -193,8 +193,20 @@ export default function CurrentDay() {
         </>
       ) : (
         /* ── Empty state ── */
-        <div className="flex-1 flex flex-col">
-          <form onSubmit={onSubmit} className="flex gap-2 mb-5 flex-shrink-0">
+        <div className="flex-1 flex flex-col items-center justify-center gap-6 min-h-[70vh] md:min-h-0">
+          <div className="text-center">
+            <div
+              className="uppercase leading-none select-none"
+              style={{ ...DISPLAY, fontSize: "clamp(52px, 8vw, 112px)", fontWeight: 900, color: "var(--c-text)", opacity: 0.04, letterSpacing: "0.05em" }}
+            >
+              Weather
+            </div>
+            <p className="text-xs uppercase tracking-widest mt-3" style={{ color: "var(--c-muted)", ...MONO }}>
+              Enter a city to get started
+            </p>
+          </div>
+
+          <form onSubmit={onSubmit} className="flex gap-2 w-full max-w-sm">
             <input
               name="place"
               value={place}
@@ -202,23 +214,12 @@ export default function CurrentDay() {
               placeholder="Search city…"
               className="search-input flex-1 px-4 py-2.5 text-sm"
               style={BODY}
+              autoFocus
             />
             <button type="submit" className="btn-accent w-11 h-[42px] flex-shrink-0">
               <BsSearch size={14} />
             </button>
           </form>
-
-          <div className="flex-1 flex flex-col items-center justify-center gap-3">
-            <div
-              className="uppercase leading-none"
-              style={{ ...DISPLAY, fontSize: "clamp(60px, 9vw, 120px)", fontWeight: 900, color: "var(--c-text)", opacity: 0.04, letterSpacing: "0.05em", userSelect: "none" }}
-            >
-              Weather
-            </div>
-            <p className="text-sm" style={{ color: "var(--c-muted)", ...MONO }}>
-              Search a city to get started
-            </p>
-          </div>
         </div>
       )}
     </div>
