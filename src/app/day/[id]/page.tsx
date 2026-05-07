@@ -47,14 +47,11 @@ export default function DayPage() {
 
   return (
     <div
-      className="h-screen overflow-hidden flex flex-col"
-      style={{
-        background:
-          "radial-gradient(ellipse at 70% 10%, #1E1A14 0%, #100F0D 50%)",
-      }}
+      className="flex flex-col min-h-screen md:h-screen md:overflow-hidden"
+      style={{ background: "radial-gradient(ellipse at 70% 10%, #1E1A14 0%, #100F0D 50%)" }}
     >
       {/* ── Nav ── */}
-      <div className="flex-shrink-0 flex items-center px-6 py-3">
+      <div className="flex-shrink-0 flex items-center px-4 md:px-6 py-3">
         <Link
           href="/"
           className="btn-outline flex items-center gap-2 px-4 py-2 text-xs tracking-widest"
@@ -66,13 +63,16 @@ export default function DayPage() {
       </div>
 
       {/* ── Content ── */}
-      <div className="flex-1 min-h-0 flex flex-col items-center px-6 pt-2 pb-2 gap-6">
+      <div className="flex-1 md:min-h-0 flex flex-col items-center px-4 md:px-6 pt-2 pb-24 md:pb-2 gap-4 md:gap-6 overflow-y-auto md:overflow-hidden">
         <HeadingSection index={headingIndex} />
         <DayDetails first={first} last={last} />
       </div>
 
-      {/* ── Pagination — always pinned to bottom ── */}
-      <div className="flex-shrink-0 flex justify-center py-4">
+      {/* ── Pagination — sticky on mobile, static on desktop ── */}
+      <div
+        className="flex-shrink-0 sticky bottom-0 md:static flex justify-center py-4 z-10"
+        style={{ background: "var(--c-bg)" }}
+      >
         <Pagination index={id} />
       </div>
     </div>

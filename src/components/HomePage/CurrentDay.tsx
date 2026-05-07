@@ -22,10 +22,7 @@ const formatTimezone = (s: number): string => {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="chip p-3 flex flex-col gap-0.5">
-      <span
-        className="text-[10px] uppercase tracking-widest"
-        style={{ color: "var(--c-muted)", ...MONO }}
-      >
+      <span className="text-[10px] uppercase tracking-widest" style={{ color: "var(--c-muted)", ...MONO }}>
         {label}
       </span>
       <span className="text-sm font-semibold" style={{ color: "var(--c-text)", ...MONO }}>
@@ -38,10 +35,7 @@ function Stat({ label, value }: { label: string; value: string }) {
 function FooterItem({ label, value }: { label: string; value?: string }) {
   return (
     <div>
-      <p
-        className="text-[10px] uppercase tracking-widest mb-0.5"
-        style={{ color: "var(--c-muted)", ...MONO }}
-      >
+      <p className="text-[10px] uppercase tracking-widest mb-0.5" style={{ color: "var(--c-muted)", ...MONO }}>
         {label}
       </p>
       <p className="text-sm font-semibold" style={{ color: "var(--c-sub)", ...MONO }}>
@@ -71,40 +65,32 @@ export default function CurrentDay() {
   };
 
   return (
-    <div className="card h-full p-6 flex flex-col">
+    <div className="card p-5 md:h-full flex flex-col">
 
       {visible && dayForecast ? (
         <>
-          {/* ── Top row: city name + compact search ── */}
-          <div className="flex items-start justify-between gap-4 flex-shrink-0 mb-4">
+          {/* ── Top: city name + compact search ── */}
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 flex-shrink-0 mb-4">
             <div className="animate-slide-right">
               <h1
                 className="leading-none uppercase tracking-wide"
-                style={{
-                  ...DISPLAY,
-                  fontSize: "clamp(22px, 2.5vw, 38px)",
-                  fontWeight: 900,
-                  color: "var(--c-text)",
-                }}
+                style={{ ...DISPLAY, fontSize: "clamp(22px, 2.5vw, 38px)", fontWeight: 900, color: "var(--c-text)" }}
               >
                 {locationName}
               </h1>
-              <p
-                className="text-xs mt-1 uppercase tracking-widest"
-                style={{ color: "var(--c-muted)", ...MONO }}
-              >
+              <p className="text-xs mt-1 uppercase tracking-widest" style={{ color: "var(--c-muted)", ...MONO }}>
                 {city?.country} · {city?.date}
               </p>
             </div>
 
-            <form onSubmit={onSubmit} className="flex gap-2 flex-shrink-0 animate-fade-up">
+            <form onSubmit={onSubmit} className="flex gap-2 animate-fade-up w-full sm:w-auto">
               <input
                 name="place"
                 value={place}
                 onChange={(e) => setPlace(e.target.value)}
                 placeholder="Search city…"
-                className="search-input px-3 py-2 text-sm"
-                style={{ ...BODY, width: "190px" }}
+                className="search-input flex-1 sm:flex-none px-3 py-2 text-sm"
+                style={{ ...BODY, width: undefined }}
               />
               <button type="submit" className="btn-accent w-9 h-9 flex-shrink-0">
                 <BsSearch size={13} />
@@ -114,21 +100,17 @@ export default function CurrentDay() {
 
           <div className="rule flex-shrink-0 mb-4" />
 
-          {/* ── Main: 3-column layout ── */}
-          <div className="flex flex-1 min-h-0">
+          {/* ── Main layout ── */}
+          <div className="flex flex-col md:flex-row flex-1 md:min-h-0 gap-5 md:gap-0">
 
-            {/* Col 1: Temperature */}
-            <div className="flex flex-col justify-center pr-6 flex-shrink-0">
-              <div className="animate-temp-in">
+            {/* Temperature + condition (mobile: side by side row) */}
+            <div className="flex flex-row items-center gap-5 md:flex-col md:items-start md:justify-center md:pr-6 md:flex-shrink-0">
+
+              {/* Temperature */}
+              <div className="animate-temp-in flex-shrink-0">
                 <div
                   className="leading-none uppercase"
-                  style={{
-                    ...DISPLAY,
-                    fontSize: "clamp(64px, 8vw, 128px)",
-                    fontWeight: 900,
-                    color: "var(--c-text)",
-                    letterSpacing: "-0.02em",
-                  }}
+                  style={{ ...DISPLAY, fontSize: "clamp(64px, 8vw, 128px)", fontWeight: 900, color: "var(--c-text)", letterSpacing: "-0.02em" }}
                 >
                   {dayForecast.main.temp}
                 </div>
@@ -139,16 +121,32 @@ export default function CurrentDay() {
                   °C
                 </span>
               </div>
+
+              {/* Condition — mobile only (shown next to temperature) */}
+              <div className="flex flex-col gap-2 md:hidden animate-fade-up">
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={`https://openweathermap.org/img/w/${dayForecast.weather[0].icon}.png`}
+                    alt={dayForecast.weather[0].main}
+                    width={40}
+                    height={40}
+                    style={{ opacity: 0.9 }}
+                  />
+                  <p className="text-base font-semibold capitalize" style={{ color: "var(--c-text)", ...BODY }}>
+                    {dayForecast.weather[0].description}
+                  </p>
+                </div>
+                <p className="text-sm" style={{ color: "var(--c-sub)", ...MONO }}>
+                  Feels like {dayForecast.main.feels_like}°C
+                </p>
+              </div>
             </div>
 
-            {/* Divider */}
-            <div
-              className="flex-shrink-0 self-stretch"
-              style={{ width: "1px", background: "var(--c-border)" }}
-            />
+            {/* Vertical divider (desktop only) */}
+            <div className="hidden md:block flex-shrink-0 self-stretch" style={{ width: "1px", background: "var(--c-border)" }} />
 
-            {/* Col 2: Condition (center, fills remaining) */}
-            <div className="flex-1 flex flex-col items-center justify-center gap-3 px-6 animate-fade-up">
+            {/* Condition — desktop only (center column) */}
+            <div className="hidden md:flex flex-1 flex-col items-center justify-center gap-3 px-6 animate-fade-up">
               <Image
                 src={`https://openweathermap.org/img/w/${dayForecast.weather[0].icon}.png`}
                 alt={dayForecast.weather[0].main}
@@ -157,10 +155,7 @@ export default function CurrentDay() {
                 style={{ opacity: 0.9 }}
               />
               <div className="text-center">
-                <p
-                  className="text-lg font-semibold capitalize"
-                  style={{ color: "var(--c-text)", ...BODY }}
-                >
+                <p className="text-lg font-semibold capitalize" style={{ color: "var(--c-text)", ...BODY }}>
                   {dayForecast.weather[0].description}
                 </p>
                 <p className="text-sm mt-1" style={{ color: "var(--c-sub)", ...MONO }}>
@@ -169,29 +164,18 @@ export default function CurrentDay() {
               </div>
             </div>
 
-            {/* Divider */}
-            <div
-              className="flex-shrink-0 self-stretch"
-              style={{ width: "1px", background: "var(--c-border)" }}
-            />
+            {/* Vertical divider (desktop only) */}
+            <div className="hidden md:block flex-shrink-0 self-stretch" style={{ width: "1px", background: "var(--c-border)" }} />
 
-            {/* Col 3: Stats + button */}
-            <div
-              className="flex flex-col justify-between flex-shrink-0 pl-6 animate-fade-up"
-              style={{ width: "196px" }}
-            >
+            {/* Stats + button */}
+            <div className="flex flex-col justify-between gap-3 md:gap-0 md:flex-shrink-0 md:pl-6 md:w-[196px] animate-fade-up">
               <div className="grid grid-cols-2 gap-2">
                 <Stat label="Humidity" value={`${dayForecast.main.humidity}%`} />
                 <Stat label="Clouds"   value={`${dayForecast.clouds.all}%`} />
                 <Stat label="Wind"     value={`${dayForecast.wind.speed} m/s`} />
                 <Stat label="Pressure" value={`${dayForecast.main.pressure}`} />
               </div>
-
-              <Link
-                href="/day/1"
-                className="btn-accent w-full py-2.5 text-xs tracking-widest"
-                style={MONO}
-              >
+              <Link href="/day/1" className="btn-accent w-full py-2.5 text-xs tracking-widest" style={MONO}>
                 5-DAY FORECAST →
               </Link>
             </div>
@@ -200,7 +184,7 @@ export default function CurrentDay() {
           <div className="rule flex-shrink-0 mt-4 mb-3" />
 
           {/* ── Footer ── */}
-          <div className="animate-fade-in flex-shrink-0 flex justify-between">
+          <div className="animate-fade-in flex-shrink-0 grid grid-cols-2 sm:flex sm:justify-between gap-y-3 sm:gap-0">
             <FooterItem label="Sunrise"  value={city?.sunrise} />
             <FooterItem label="Sunset"   value={city?.sunset} />
             <FooterItem label="Timezone" value={city ? formatTimezone(city.timezone) : undefined} />
@@ -227,15 +211,7 @@ export default function CurrentDay() {
           <div className="flex-1 flex flex-col items-center justify-center gap-3">
             <div
               className="uppercase leading-none"
-              style={{
-                ...DISPLAY,
-                fontSize: "clamp(60px, 9vw, 120px)",
-                fontWeight: 900,
-                color: "var(--c-text)",
-                opacity: 0.04,
-                letterSpacing: "0.05em",
-                userSelect: "none",
-              }}
+              style={{ ...DISPLAY, fontSize: "clamp(60px, 9vw, 120px)", fontWeight: 900, color: "var(--c-text)", opacity: 0.04, letterSpacing: "0.05em", userSelect: "none" }}
             >
               Weather
             </div>

@@ -25,7 +25,7 @@ export default function DayDetailsBox({ index }: { index: number }) {
   if (!dayForecast) return null;
 
   return (
-    <div className="card p-4 flex flex-col gap-2" style={{ width: "190px" }}>
+    <div className="card p-4 flex flex-col gap-2 w-full">
 
       {/* Time + icon */}
       <div className="flex items-center justify-between">

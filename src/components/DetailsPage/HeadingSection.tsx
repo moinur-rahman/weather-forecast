@@ -37,7 +37,7 @@ export default function HeadingSection({ index }: { index: number }) {
         className="leading-none uppercase"
         style={{
           ...DISPLAY,
-          fontSize: "clamp(44px, 6vw, 88px)",
+          fontSize: "clamp(36px, 7vw, 88px)",
           fontWeight: 900,
           color: "var(--c-text)",
           letterSpacing: "-0.02em",
