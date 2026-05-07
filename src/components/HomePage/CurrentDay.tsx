@@ -113,10 +113,11 @@ export default function CurrentDay() {
 
       {dayForecast && (
         <div className="animate-fade-in">
-          <Link href="/day/1">
-            <button className="bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors">
-              Click here for 5 day forecast
-            </button>
+          <Link
+            href="/day/1"
+            className="bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors"
+          >
+            Click here for 5 day forecast
           </Link>
         </div>
       )}

@@ -51,12 +51,13 @@ export default function DayPage() {
           "linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3)), url('/images/cloud.jpg')",
       }}
     >
-      <div className="flex w-full h-full justify-end absolute top-0 right-0 p-3">
-        <Link href="/">
-          <button className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors">
-            <AiFillHome />
-            Back to Home
-          </button>
+      <div className="flex w-full justify-end items-start absolute top-0 right-0 p-3">
+        <Link
+          href="/"
+          className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors"
+        >
+          <AiFillHome />
+          Back to Home
         </Link>
       </div>
 
