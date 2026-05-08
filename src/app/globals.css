@@ -94,7 +94,6 @@ body {
   border: 1px solid var(--c-border);
   border-radius: 16px;
   flex: 1;
-  min-width: 140px;
   padding: 14px;
   transition: border-color 0.2s, transform 0.2s;
 }

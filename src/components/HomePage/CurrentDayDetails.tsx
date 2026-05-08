@@ -26,19 +26,19 @@ export default function CurrentDayDetails() {
   if (!dayForecast) return null;
 
   return (
-    <div className="card px-5 py-4">
+    <div className="card px-5 py-4 mt-4">
       <p
         className="text-[10px] uppercase tracking-widest mb-3"
         style={{ color: "var(--c-muted)", ...MONO }}
       >
         Hourly Forecast
       </p>
-      <div className="flex gap-3 overflow-x-auto pb-1">
+      <div className="grid grid-cols-2 md:flex md:flex-row gap-3">
         {([1, 2, 3, 4] as const).map((idx, pos) =>
           visibleCount > pos ? (
             <div
               key={idx}
-              className="animate-card-in flex-1 min-w-0"
+              className="animate-card-in md:flex-1"
               style={{ animationDelay: `${pos * 70}ms` }}
             >
               <CurrentDayDetailsBox index={idx} />

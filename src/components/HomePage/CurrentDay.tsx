@@ -193,7 +193,7 @@ export default function CurrentDay() {
         </>
       ) : (
         /* ── Empty state ── */
-        <div className="flex-1 flex flex-col items-center justify-center gap-6 min-h-[70vh] md:min-h-0">
+        <div className="flex-1 flex flex-col items-center justify-center gap-6">
           <div className="text-center">
             <div
               className="uppercase leading-none select-none"
