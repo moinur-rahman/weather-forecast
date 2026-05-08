@@ -73,7 +73,7 @@ export default function DayPage() {
         className="flex-shrink-0 sticky bottom-0 md:static flex justify-center py-4 z-10"
         style={{ background: "var(--c-bg)" }}
       >
-        <Pagination index={id} />
+        <Pagination index={id} headingIndex={headingIndex} />
       </div>
     </div>
   );

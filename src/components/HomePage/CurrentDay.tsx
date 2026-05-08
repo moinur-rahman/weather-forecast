@@ -92,7 +92,7 @@ export default function CurrentDay() {
                 className="search-input flex-1 sm:flex-none px-3 py-2 text-sm"
                 style={{ ...BODY, width: undefined }}
               />
-              <button type="submit" className="btn-accent w-9 h-9 flex-shrink-0">
+              <button type="submit" disabled={!place.trim()} className="btn-accent w-9 h-9 flex-shrink-0 disabled:opacity-30 disabled:cursor-not-allowed">
                 <BsSearch size={13} />
               </button>
             </form>
@@ -216,7 +216,7 @@ export default function CurrentDay() {
               style={BODY}
               autoFocus
             />
-            <button type="submit" className="btn-accent w-11 h-[42px] flex-shrink-0">
+            <button type="submit" disabled={!place.trim()} className="btn-accent w-11 h-[42px] flex-shrink-0 disabled:opacity-30 disabled:cursor-not-allowed">
               <BsSearch size={14} />
             </button>
           </form>
